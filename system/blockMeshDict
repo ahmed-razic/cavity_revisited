@@ -38,10 +38,12 @@ vertices
     ($xmax $ymax $zmax)                 //6
     ($xmin $ymax $zmax)                 //7
     
-    //(#calc "2*$xmax" $ymin $zmin)     //8
-    //(#calc "2*$xmax" $ymax $zmin)     //9
-    //(#calc "2*$xmax" $ymin $zmax)     //10
-    //(#calc "2*$xmax" $ymax $zmax)     //11
+    /*
+    (#calc "2*$xmax" $ymin $zmin)     //8
+    (#calc "2*$xmax" $ymax $zmin)     //9
+    (#calc "2*$xmax" $ymin $zmax)     //10
+    (#calc "2*$xmax" $ymax $zmax)     //11
+    */
 );
 
 blocks
@@ -72,12 +74,12 @@ boundary                                //patches defined from one or more faces
         type    wall;
         faces
         (
-            (0 4 2 7)
+            (0 4 7 3)
             (0 1 5 4)
             (1 2 6 5)
         );
     }
-/*
+
     frontAndBack
     {
         type    empty;
@@ -87,8 +89,8 @@ boundary                                //patches defined from one or more faces
             (4 5 6 7)
         );
     }  
-*/  
-)
+);
+
 /*
     interface1
     {
@@ -106,11 +108,11 @@ boundary                                //patches defined from one or more faces
         );
     }
 );
+*/
 
 mergePatchPairs
 (
-    (interface1 interface2)
+    //(interface1 interface2)
 );
-*/
 
 // ************************************************************************* //
