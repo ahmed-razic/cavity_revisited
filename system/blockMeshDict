@@ -1,0 +1,116 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+  =========                 |
+  \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
+   \\    /   O peration     | Website:  https://openfoam.org
+    \\  /    A nd           | Version:  13
+     \\/     M anipulation  |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    format          ascii;
+    class           dictionary;
+    location        "system";
+    object          blockMeshDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+convertToMeters     1;
+
+xmin    0;
+ymin    0;
+zmin    0;
+xmax    1;
+ymax    1;
+zmax    1;
+
+xcells  20;
+ycells  20;
+zcells  1;
+
+vertices
+(
+    ($xmin $ymin $zmin)                 //0
+    ($xmax $ymin $zmin)                 //1
+    ($xmax $ymax $zmin)                 //2
+    ($xmin $ymax $zmin)                 //3
+    ($xmin $ymin $zmax)                 //4
+    ($xmax $ymin $zmax)                 //5
+    ($xmax $ymax $zmax)                 //6
+    ($xmin $ymax $zmax)                 //7
+    
+    //(#calc "2*$xmax" $ymin $zmin)     //8
+    //(#calc "2*$xmax" $ymax $zmin)     //9
+    //(#calc "2*$xmax" $ymin $zmax)     //10
+    //(#calc "2*$xmax" $ymax $zmax)     //11
+);
+
+blocks
+(
+    hex (0 1 2 3 4 5 6 7) ($xcells $ycells $zcells) simpleGrading (1 1 1)
+    //hex (1 8 9 2 5 10 11 6) ($xcells $ycells $zcells) simpleGrading (1 1 1)
+);
+
+edges
+(
+    //arc 0 1 (#calc "$xmax/2" -#calc "$ymax / 4" $zmin)
+    //arc 4 5 (#calc "$xmax/2" -#calc "$ymax / 4" $zmax)
+);
+
+boundary                                //patches defined from one or more faces
+(
+    movingWall
+    {
+        type    wall;
+        faces
+        (
+            (3 7 6 2)
+        );
+    }
+
+    fixedWalls
+    {
+        type    wall;
+        faces
+        (
+            (0 4 2 7)
+            (0 1 5 4)
+            (1 2 6 5)
+        );
+    }
+/*
+    frontAndBack
+    {
+        type    empty;
+        faces
+        (
+            (0 3 2 1)
+            (4 5 6 7)
+        );
+    }  
+*/  
+)
+/*
+    interface1
+    {
+        faces
+        (
+            (1 2 6 5)
+        );
+    }
+
+    interface2
+    {
+        faces
+        (
+            (1 5 6 2)
+        );
+    }
+);
+
+mergePatchPairs
+(
+    (interface1 interface2)
+);
+*/
+
+// ************************************************************************* //
