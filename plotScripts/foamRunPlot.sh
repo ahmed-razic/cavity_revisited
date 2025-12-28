@@ -22,6 +22,7 @@ set ylabel "Courant number"
 set title "Convergation - Courant number"
 plot "logs/CourantMax_0" using 1:2 with lines
 
+
 #Terminal 2
 set terminal qt 2
 set grid xtics
@@ -31,8 +32,7 @@ set xlabel "Time (s)"
 set ylabel "Ux and Uy"
 set title "Speed Ux and Uy over time"
 set logscale y
-plot "logs/Ux_0" using 1:2 with lines,\
-"logs/Uy_0" using 1:2 with lines
+plot "logs/Ux_0" using 1:2 with lines, "logs/Uy_0" using 1:2 with lines
 
 
 print "Plotting with GNUPLOT"

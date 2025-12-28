@@ -56,19 +56,22 @@ functions
 
         log             true;
 
-        writeControl    runTime;
+        writeControl    timeStep;
 
+        writeFields     false;
+        
         select          all;
-
-        operation       none
-
+        
+        operation       none;
+        
         fields
         (
             p
         );
     }
 
-        minmaxVectorDomain
+
+    minmaxVectorDomain
     {
         type            volFieldValue;
 
@@ -76,11 +79,13 @@ functions
 
         log             true;
 
-        writeControl    runTime;
+        writeControl    timeStep;
+
+        writeFields     false;
 
         select          all;
 
-        operation       none
+        operation       none;
 
         fields
         (
@@ -90,22 +95,19 @@ functions
 
     minVelocity
     {
-        $minmaxScalarDomain;
-        
+        $minmaxVectorDomain;        
         operation       minMag;
     }
 
     maxVelocity
     {
-        $minmaxScalarDomain;
-        
+        $minmaxVectorDomain;
         operation       maxMag;
     }
 
     minPressure
     {
         $minmaxVectorDomain;
-
         operation       min;
     }
 
