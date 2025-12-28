@@ -14,7 +14,7 @@ foamLog log.foamRun
 foamPostProcess -func sampleDict -latestTime
 
 gnuplot plotScripts/foamRunPlot.sh
-#gnuplot plotScripts/sampleDictPlot.sh
+gnuplot plotScripts/sampleDictPlot.sh
 
 paraview cavity_revisited.foam
 
