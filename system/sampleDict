@@ -32,7 +32,7 @@ sets
 (
     lineX
     {
-        type        lineCells;
+        type        lineCellFace;
         axis        x;
         start       (-1 0.5 0);
         end         (2 0.5 0);
@@ -40,7 +40,7 @@ sets
 
     lineY
     {
-        type        lineCells;
+        type        lineCellFace;
         axis        y;
         start       (0.5 -1 0);
         end         (0.5 2 0);
